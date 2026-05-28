@@ -30,7 +30,12 @@
                     </div>
                     <div>
                         <label class="form-label">Hero Image (portrait photo of Ruth)</label>
-                        @php $heroImg = $settings['home_hero_image']->value ?? null; @endphp
+                        @php
+                            $_heroVal = $settings['home_hero_image']->value ?? null;
+                            $heroImg = $_heroVal
+                                ? (str_starts_with($_heroVal, 'http') ? $_heroVal : \Storage::disk('s3')->temporaryUrl($_heroVal, now()->addDays(7)))
+                                : null;
+                        @endphp
                         @if($heroImg)
                             <div class="mb-2">
                                 <img src="{{ $heroImg }}" alt="Current hero image" class="h-24 w-24 rounded-full object-cover border border-gray-200">

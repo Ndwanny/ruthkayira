@@ -25,7 +25,7 @@ class SettingController extends Controller
             $path = $request->file('home_hero_image')->store('heroes', 's3');
             SiteSetting::updateOrCreate(
                 ['key' => 'home_hero_image'],
-                ['value' => Storage::disk('s3')->url($path)]
+                ['value' => $path]
             );
         }
 

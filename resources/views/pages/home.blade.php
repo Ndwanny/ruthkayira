@@ -9,7 +9,12 @@
 <div class="section">
     <div class="container-default w-container">
         <div class="w-layout-grid grid-2-columns image-and-paragraph">
-            @php $heroImg = $settings['home_hero_image']->value ?? 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?fm=jpg&q=60&w=400&auto=format&fit=crop'; @endphp
+            @php
+                $_heroVal = $settings['home_hero_image']->value ?? null;
+                $heroImg = $_heroVal
+                    ? (str_starts_with($_heroVal, 'http') ? $_heroVal : \Storage::disk('s3')->temporaryUrl($_heroVal, now()->addDays(7)))
+                    : 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?fm=jpg&q=60&w=400&auto=format&fit=crop';
+            @endphp
         <img src="{{ $heroImg }}" alt="Ruth Kayira" width="70" class="avatar-circle _07"/>
             <div class="inner-container _370px">
                 <div class="text-center-mbl">
