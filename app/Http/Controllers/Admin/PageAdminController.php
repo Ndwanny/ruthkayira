@@ -70,10 +70,10 @@ class PageAdminController extends Controller
         $data['show_in_nav'] = $request->has('show_in_nav');
 
         if ($request->hasFile('hero_image')) {
-            if ($page->hero_image) {
-                Storage::disk('public')->delete($page->hero_image);
+            if ($page->hero_image && !str_starts_with($page->hero_image, 'http')) {
+                Storage::disk('s3')->delete($page->hero_image);
             }
-            $data['hero_image'] = $request->file('hero_image')->store('heroes', 'public');
+            $data['hero_image'] = $request->file('hero_image')->store('heroes', 's3');
         }
 
         $isContact = $page->slug === 'contact';
@@ -121,9 +121,9 @@ class PageAdminController extends Controller
                       'service_1_icon','service_2_icon','service_3_icon','service_4_icon'] as $field) {
                 if ($request->hasFile($field)) {
                     if (!empty($content[$field]) && !str_starts_with($content[$field], 'http')) {
-                        Storage::disk('public')->delete($content[$field]);
+                        Storage::disk('s3')->delete($content[$field]);
                     }
-                    $content[$field] = $request->file($field)->store('about-icons', 'public');
+                    $content[$field] = $request->file($field)->store('about-icons', 's3');
                 }
             }
 

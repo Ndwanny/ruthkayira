@@ -41,8 +41,13 @@
             <div>
                 <label class="form-label">Hero Photo</label>
                 @if($page->hero_image)
+                    @php
+                        $heroUrl = str_starts_with($page->hero_image, 'http')
+                            ? $page->hero_image
+                            : \Storage::disk('s3')->temporaryUrl($page->hero_image, now()->addDays(7));
+                    @endphp
                     <div class="mb-2">
-                        <img src="{{ Storage::url($page->hero_image) }}" alt="Hero" class="h-32 w-auto rounded border border-gray-200 object-cover">
+                        <img src="{{ $heroUrl }}" alt="Hero" class="h-32 w-auto rounded border border-gray-200 object-cover">
                         <p class="text-xs text-gray-400 mt-1">Upload a new image to replace.</p>
                     </div>
                 @else

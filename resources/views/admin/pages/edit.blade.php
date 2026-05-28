@@ -25,11 +25,15 @@
                 <button type="submit" class="btn-primary">Save Changes</button>
                 <a href="{{ route('admin.pages.index') }}" class="btn-secondary">Cancel</a>
             </div>
-            <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" onsubmit="return confirm('Delete this page? This cannot be undone.')">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn-danger">Delete Page</button>
-            </form>
+            <button type="button" class="btn-danger"
+                onclick="if(confirm('Delete this page? This cannot be undone.')) document.getElementById('delete-page-{{ $page->id }}').submit()">
+                Delete Page
+            </button>
         </div>
+    </form>
+
+    <form id="delete-page-{{ $page->id }}" action="{{ route('admin.pages.destroy', $page) }}" method="POST">
+        @csrf
+        @method('DELETE')
     </form>
 @endsection
