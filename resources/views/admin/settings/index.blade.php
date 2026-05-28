@@ -3,7 +3,7 @@
 @section('title', 'Site Settings')
 
 @section('content')
-    <form action="{{ route('admin.settings.update') }}" method="POST">
+    <form action="{{ route('admin.settings.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <div class="space-y-8">
@@ -27,6 +27,17 @@
                         <label class="form-label">Hero Button Text</label>
                         <input type="text" name="home_hero_button" value="{{ old('home_hero_button', $settings['home_hero_button']->value ?? '') }}"
                             class="form-input" placeholder="Contact me">
+                    </div>
+                    <div>
+                        <label class="form-label">Hero Image (portrait photo of Ruth)</label>
+                        @php $heroImg = $settings['home_hero_image']->value ?? null; @endphp
+                        @if($heroImg)
+                            <div class="mb-2">
+                                <img src="{{ $heroImg }}" alt="Current hero image" class="h-24 w-24 rounded-full object-cover border border-gray-200">
+                                <p class="text-xs text-gray-400 mt-1">Current image — upload a new one to replace it.</p>
+                            </div>
+                        @endif
+                        <input type="file" name="home_hero_image" accept="image/*" class="form-input">
                     </div>
                 </div>
             </div>

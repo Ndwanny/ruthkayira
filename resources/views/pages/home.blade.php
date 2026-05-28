@@ -9,7 +9,8 @@
 <div class="section">
     <div class="container-default w-container">
         <div class="w-layout-grid grid-2-columns image-and-paragraph">
-            <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?fm=jpg&q=60&w=400&auto=format&fit=crop" alt="Product Designer - My Perfect Stitch" width="70" class="avatar-circle _07"/>
+            @php $heroImg = $settings['home_hero_image']->value ?? 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?fm=jpg&q=60&w=400&auto=format&fit=crop'; @endphp
+        <img src="{{ $heroImg }}" alt="Ruth Kayira" width="70" class="avatar-circle _07"/>
             <div class="inner-container _370px">
                 <div class="text-center-mbl">
                     <h1 class="heading-h1-size mg-bottom-0">
