@@ -132,7 +132,7 @@
                                 class="form-input"
                                 placeholder="{{ ['My Perfect Stitch','"What If Your Hobby Is the Start of a Million-Dollar Business?"','Zambian Public Service'][$i-1] }}">
                         </div>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="form-label">From</label>
                                 <input type="text" name="highlight_{{ $i }}_from"

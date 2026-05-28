@@ -1,8 +1,8 @@
 {{-- Shared form fields for create/edit product --}}
 
-<div class="grid grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {{-- Left: main fields --}}
-    <div class="col-span-2 space-y-5">
+    <div class="md:col-span-2 space-y-5">
 
         <div>
             <label for="title" class="form-label">Title <span class="text-red-500">*</span></label>
@@ -26,7 +26,7 @@
             @error('description') <p class="form-error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="price" class="form-label">Price (USD) <span class="text-red-500">*</span></label>
                 <input id="price" type="number" step="0.01" min="0" name="price"
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="material" class="form-label">Material</label>
                 <input id="material" type="text" name="material" value="{{ old('material', $product->material ?? '') }}"
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
                 <label for="lead_time" class="form-label">Lead Time</label>
                 <input id="lead_time" type="text" name="lead_time" value="{{ old('lead_time', $product->lead_time ?? '') }}"

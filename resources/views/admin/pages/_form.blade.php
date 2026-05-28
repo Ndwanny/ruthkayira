@@ -1,8 +1,8 @@
 {{-- Shared form fields for create/edit page --}}
 
-<div class="grid grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {{-- Left: main fields --}}
-    <div class="col-span-2 space-y-5">
+    <div class="md:col-span-2 space-y-5">
         <div>
             <label for="title" class="form-label">Title <span class="text-red-500">*</span></label>
             <input

@@ -1,8 +1,8 @@
 {{-- Shared form fields for create/edit project --}}
 
-<div class="grid grid-cols-3 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     {{-- Left: main fields --}}
-    <div class="col-span-2 space-y-5">
+    <div class="md:col-span-2 space-y-5">
 
         <div>
             <label for="title" class="form-label">Title <span class="text-red-500">*</span></label>
@@ -25,7 +25,7 @@
             @error('tagline') <p class="form-error">{{ $message }}</p> @enderror
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="client" class="form-label">Client</label>
                 <input id="client" type="text" name="client" value="{{ old('client', $project->client ?? '') }}"
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
                 <label for="services" class="form-label">Services</label>
                 <input id="services" type="text" name="services" value="{{ old('services', $project->services ?? '') }}"

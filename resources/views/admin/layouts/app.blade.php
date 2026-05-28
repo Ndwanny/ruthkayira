@@ -8,13 +8,21 @@
 </head>
 <body class="min-h-screen bg-gray-50 flex">
 
+    {{-- Mobile overlay --}}
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/40 z-40 hidden md:hidden"></div>
+
     {{-- Sidebar --}}
-    <aside class="w-56 bg-white border-r border-gray-200 flex flex-col min-h-screen fixed top-0 left-0">
-        <div class="px-5 py-5 border-b border-gray-200">
-            <a href="{{ route('admin.dashboard') }}" class="font-semibold text-gray-900 tracking-tight">
-                {{ config('app.name') }}
-            </a>
-            <p class="text-xs text-gray-400 mt-0.5">Admin Panel</p>
+    <aside id="admin-sidebar" class="w-56 bg-white border-r border-gray-200 flex flex-col min-h-screen fixed top-0 left-0 z-50 -translate-x-full md:translate-x-0 transition-transform duration-200">
+        <div class="px-5 py-5 border-b border-gray-200 flex items-center justify-between">
+            <div>
+                <a href="{{ route('admin.dashboard') }}" class="font-semibold text-gray-900 tracking-tight">
+                    {{ config('app.name') }}
+                </a>
+                <p class="text-xs text-gray-400 mt-0.5">Admin Panel</p>
+            </div>
+            <button id="sidebar-close" class="md:hidden p-1 rounded text-gray-400 hover:text-gray-600 hover:bg-gray-100">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
         </div>
 
         <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
@@ -63,12 +71,15 @@
     </aside>
 
     {{-- Main content --}}
-    <div class="ml-56 flex-1 flex flex-col min-h-screen">
-        <header class="bg-white border-b border-gray-200 px-8 py-4">
-            <h1 class="text-base font-semibold text-gray-900">@yield('title', 'Dashboard')</h1>
+    <div class="md:ml-56 flex-1 flex flex-col min-h-screen w-full min-w-0">
+        <header class="bg-white border-b border-gray-200 px-4 py-3 md:px-8 md:py-4 flex items-center gap-3 sticky top-0 z-30">
+            <button id="sidebar-toggle" class="md:hidden p-1.5 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-100 flex-shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+            <h1 class="text-base font-semibold text-gray-900 truncate">@yield('title', 'Dashboard')</h1>
         </header>
 
-        <main class="flex-1 px-8 py-8">
+        <main class="flex-1 px-4 py-6 md:px-8 md:py-8">
             @if(session('success'))
                 <div class="mb-6 flex items-center gap-2 px-4 py-3 bg-green-50 border border-green-200 rounded text-sm text-green-800">
                     <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
@@ -79,6 +90,26 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        const sidebar  = document.getElementById('admin-sidebar');
+        const overlay  = document.getElementById('sidebar-overlay');
+        const toggleBtn = document.getElementById('sidebar-toggle');
+        const closeBtn  = document.getElementById('sidebar-close');
+
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        }
+        function closeSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        }
+
+        toggleBtn.addEventListener('click', openSidebar);
+        closeBtn.addEventListener('click', closeSidebar);
+        overlay.addEventListener('click', closeSidebar);
+    </script>
 
 </body>
 </html>

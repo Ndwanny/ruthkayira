@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Stats --}}
-    <div class="grid grid-cols-4 gap-4 mb-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         @foreach([
             ['label' => 'Total Posts',  'value' => $totalPosts],
             ['label' => 'Published',    'value' => $publishedPosts],
@@ -35,7 +35,8 @@
         @if($recentPosts->isEmpty())
             <p class="px-6 py-8 text-sm text-gray-500 text-center">No posts yet.</p>
         @else
-            <table class="w-full text-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm min-w-[480px]">
                 <thead class="bg-gray-50 text-xs uppercase text-gray-500 tracking-wide">
                     <tr>
                         <th class="text-left px-6 py-3">Title</th>
@@ -63,6 +64,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
         @endif
     </div>
 @endsection

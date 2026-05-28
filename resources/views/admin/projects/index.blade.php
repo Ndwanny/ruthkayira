@@ -12,7 +12,8 @@
         @if($projects->isEmpty())
             <p class="px-6 py-12 text-sm text-gray-500 text-center">No projects yet. <a href="{{ route('admin.projects.create') }}" class="underline">Create one</a>.</p>
         @else
-            <table class="w-full text-sm">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm min-w-[500px]">
                 <thead class="bg-gray-50 text-xs uppercase text-gray-500 tracking-wide">
                     <tr>
                         <th class="text-left px-6 py-3">Title</th>
@@ -57,6 +58,7 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
         @endif
     </div>
 @endsection

@@ -3,8 +3,8 @@
 <div class="space-y-8">
 
     {{-- Page settings sidebar (shared) --}}
-    <div class="grid grid-cols-3 gap-8">
-        <div class="col-span-2">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="md:col-span-2">
             <div>
                 <label class="form-label">Page Title</label>
                 <input type="text" name="title" value="{{ old('title', $page->title) }}" required class="form-input text-base">
@@ -95,7 +95,7 @@
                     <label class="form-label">Organisation / Description</label>
                     <input type="text" name="recognition_{{ $i }}_org" value="{{ old('recognition_'.$i.'_org', $c['recognition_'.$i.'_org'] ?? $defaults[$i]['org']) }}" class="form-input">
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="form-label">From</label>
                         <input type="text" name="recognition_{{ $i }}_from" value="{{ old('recognition_'.$i.'_from', $c['recognition_'.$i.'_from'] ?? $defaults[$i]['from']) }}" class="form-input">
@@ -133,7 +133,7 @@
             @for($i = 1; $i <= 3; $i++)
             <div class="border border-gray-100 rounded-lg p-4 space-y-3">
                 <p class="text-xs font-medium text-gray-500 uppercase tracking-wide">Journey Entry {{ $i }}</p>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="form-label">Organisation</label>
                         <input type="text" name="journey_{{ $i }}_org" value="{{ old('journey_'.$i.'_org', $c['journey_'.$i.'_org'] ?? $journeyDefaults[$i]['org']) }}" class="form-input">
@@ -143,7 +143,7 @@
                         <input type="text" name="journey_{{ $i }}_title" value="{{ old('journey_'.$i.'_title', $c['journey_'.$i.'_title'] ?? $journeyDefaults[$i]['title']) }}" class="form-input">
                     </div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="form-label">From</label>
                         <input type="text" name="journey_{{ $i }}_from" value="{{ old('journey_'.$i.'_from', $c['journey_'.$i.'_from'] ?? $journeyDefaults[$i]['from']) }}" class="form-input">
