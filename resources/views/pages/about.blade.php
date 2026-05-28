@@ -31,7 +31,7 @@
                 @php
                     $heroImg = $aboutPage?->hero_image;
                     $heroSrc = $heroImg
-                        ? (str_starts_with($heroImg, 'http') ? $heroImg : Storage::url($heroImg))
+                        ? (str_starts_with($heroImg, 'http') ? $heroImg : Storage::disk('s3')->temporaryUrl($heroImg, now()->addDays(7)))
                         : 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fm=jpg&q=60&w=1200&auto=format&fit=crop';
                 @endphp
                 <img src="{{ $heroSrc }}" loading="eager" alt="About Ruth Kayira" class="image cover"/>
@@ -105,7 +105,7 @@
                     $journeyIcons = array_map(function($i) use ($c, $journeyIconDefaults) {
                         $p = $c['journey_'.$i.'_icon'] ?? '';
                         if (!$p) return $journeyIconDefaults[$i];
-                        return str_starts_with($p, 'http') ? $p : \Illuminate\Support\Facades\Storage::url($p);
+                        return str_starts_with($p, 'http') ? $p : \Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl($p, now()->addDays(7));
                     }, [1=>1,2=>2,3=>3]);
                 @endphp
                 @for($i = 1; $i <= 3; $i++)
@@ -172,7 +172,7 @@
                     $serviceIcons = array_map(function($i) use ($c, $serviceIconDefaults) {
                         $p = $c['service_'.$i.'_icon'] ?? '';
                         if (!$p) return $serviceIconDefaults[$i];
-                        return str_starts_with($p, 'http') ? $p : \Illuminate\Support\Facades\Storage::url($p);
+                        return str_starts_with($p, 'http') ? $p : \Illuminate\Support\Facades\Storage::disk('s3')->temporaryUrl($p, now()->addDays(7));
                     }, [1=>1,2=>2,3=>3,4=>4]);
                 @endphp
                 @for($i = 1; $i <= 4; $i++)
