@@ -25,13 +25,17 @@
             </div>
 
             {{-- Cover image --}}
-            @if($post->cover_image)
+            @php
+                $cover = $post->cover_image;
+                $coverSrc = ($cover && str_starts_with($cover, 'http'))
+                    ? $cover
+                    : 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?fm=jpg&q=60&w=1200&auto=format&fit=crop';
+            @endphp
             <div class="mg-bottom-64px">
                 <div class="image-wrapper border-radius-16px">
-                    <img src="{{ Storage::url($post->cover_image) }}" loading="eager" alt="{{ $post->title }}" class="image cover"/>
+                    <img src="{{ $coverSrc }}" loading="eager" alt="{{ $post->title }}" class="image cover"/>
                 </div>
             </div>
-            @endif
 
             {{-- Body --}}
             <div class="rich-text w-richtext">
@@ -61,11 +65,13 @@
                         <div class="mg-right-32px mg-right-0px-mbl mg-bottom-32px-mbl">
                             <div class="inner-container _384px max-w-100-mbl">
                                 <div class="image-wrapper border-radius-8px post-item">
-                                    @if($related->cover_image)
-                                        <img src="{{ Storage::url($related->cover_image) }}" loading="eager" alt="{{ $related->title }}" class="image cover"/>
-                                    @else
-                                        <img src="https://images.unsplash.com/photo-1590650153855-d9e808231d41?fm=jpg&q=60&w=800&auto=format&fit=crop" loading="eager" alt="{{ $related->title }}" class="image cover"/>
-                                    @endif
+                                    @php
+                                        $rc = $related->cover_image;
+                                        $rSrc = ($rc && str_starts_with($rc, 'http'))
+                                            ? $rc
+                                            : 'https://images.unsplash.com/photo-1590650153855-d9e808231d41?fm=jpg&q=60&w=800&auto=format&fit=crop';
+                                    @endphp
+                                    <img src="{{ $rSrc }}" loading="eager" alt="{{ $related->title }}" class="image cover"/>
                                 </div>
                             </div>
                         </div>

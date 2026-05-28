@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-
+            
             {{-- Meta grid --}}
             <div class="mg-bottom-40px">
                 <div class="w-layout-grid grid-5-columns detail">
@@ -51,17 +51,17 @@
             </div>
 
             {{-- Hero image --}}
-            @if($project->hero_image)
+            @php
+                $hi = $project->hero_image;
+                $heroSrc = $hi
+                    ? (str_starts_with($hi, 'http') ? $hi : Storage::url($hi))
+                    : 'https://images.unsplash.com/photo-1653971858474-4f2dfa7f4dc1?fm=jpg&q=60&w=1200&auto=format&fit=crop';
+            @endphp
             <div class="mg-bottom-64px">
                 <div class="image-wrapper border-radius-12px">
-                    @if(str_starts_with($project->hero_image, 'http'))
-                        <img src="{{ $project->hero_image }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
-                    @else
-                        <img src="{{ Storage::url($project->hero_image) }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
-                    @endif
+                    <img src="{{ $heroSrc }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
                 </div>
             </div>
-            @endif
 
             {{-- About the Project --}}
             @if($project->about_col1 || $project->about_col2)
@@ -79,30 +79,26 @@
             @endif
 
             {{-- Side-by-side images --}}
-            @if($project->image_1 || $project->image_2)
+            @php
+                $i1 = $project->image_1;
+                $i2 = $project->image_2;
+                $img1Src = $i1
+                    ? (str_starts_with($i1, 'http') ? $i1 : Storage::url($i1))
+                    : 'https://images.unsplash.com/photo-1720247520862-7e4b14176fa8?fm=jpg&q=60&w=800&auto=format&fit=crop';
+                $img2Src = $i2
+                    ? (str_starts_with($i2, 'http') ? $i2 : Storage::url($i2))
+                    : 'https://images.unsplash.com/photo-1578509566163-068acd11b8e7?fm=jpg&q=60&w=800&auto=format&fit=crop';
+            @endphp
             <div class="mg-bottom-64px">
                 <div class="w-layout-grid grid-2-columns portfolio-about-images">
-                    @if($project->image_1)
                     <div class="image-wrapper border-radius-12px">
-                        @if(str_starts_with($project->image_1, 'http'))
-                            <img src="{{ $project->image_1 }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
-                        @else
-                            <img src="{{ Storage::url($project->image_1) }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
-                        @endif
+                        <img src="{{ $img1Src }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
                     </div>
-                    @endif
-                    @if($project->image_2)
                     <div class="image-wrapper border-radius-12px">
-                        @if(str_starts_with($project->image_2, 'http'))
-                            <img src="{{ $project->image_2 }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
-                        @else
-                            <img src="{{ Storage::url($project->image_2) }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
-                        @endif
+                        <img src="{{ $img2Src }}" alt="{{ $project->title }}" class="image cover" style="min-height:280px;"/>
                     </div>
-                    @endif
                 </div>
             </div>
-            @endif
 
             {{-- Project Execution --}}
             @if($project->exec_col1 || $project->exec_col2)
@@ -120,15 +116,15 @@
             @endif
 
             {{-- Execution image --}}
-            @if($project->exec_image)
+            @php
+                $ei = $project->exec_image;
+                $execSrc = $ei
+                    ? (str_starts_with($ei, 'http') ? $ei : Storage::url($ei))
+                    : 'https://images.unsplash.com/photo-1774709440530-b6916d8c36df?fm=jpg&q=60&w=1200&auto=format&fit=crop';
+            @endphp
             <div class="image-wrapper border-radius-12px">
-                @if(str_starts_with($project->exec_image, 'http'))
-                    <img src="{{ $project->exec_image }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
-                @else
-                    <img src="{{ Storage::url($project->exec_image) }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
-                @endif
+                <img src="{{ $execSrc }}" alt="{{ $project->title }}" class="image cover" style="min-height:400px;"/>
             </div>
-            @endif
 
         </div>
     </div>

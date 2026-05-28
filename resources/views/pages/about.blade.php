@@ -28,11 +28,13 @@
                 </div>
             </div>
             <div class="image-wrapper border-radius-12px">
-                @if($aboutPage?->hero_image)
-                    <img src="{{ Storage::url($aboutPage->hero_image) }}" loading="eager" alt="About Ruth Kayira" class="image cover"/>
-                @else
-                    <img src="{{ asset('images/about.jpg') }}" loading="eager" alt="About Ruth Kayira" class="image cover"/>
-                @endif
+                @php
+                    $heroImg = $aboutPage?->hero_image;
+                    $heroSrc = $heroImg
+                        ? (str_starts_with($heroImg, 'http') ? $heroImg : Storage::url($heroImg))
+                        : 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?fm=jpg&q=60&w=1200&auto=format&fit=crop';
+                @endphp
+                <img src="{{ $heroSrc }}" loading="eager" alt="About Ruth Kayira" class="image cover"/>
             </div>
         </div>
     </div>
