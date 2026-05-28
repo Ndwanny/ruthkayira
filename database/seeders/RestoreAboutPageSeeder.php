@@ -13,7 +13,7 @@ class RestoreAboutPageSeeder extends Seeder
             ['slug' => 'about'],
             [
                 'title'            => 'About',
-                'body'             => null,
+                'body'             => '',
                 'hero_image'       => null,
                 'meta_description' => 'Ruth Kayira Mooto is the founder of My Perfect Stitch — blending African craftsmanship with bold, functional design and championing purpose-driven entrepreneurship in Zambia and beyond.',
                 'show_in_nav'      => 1,
